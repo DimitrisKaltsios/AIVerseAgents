@@ -1,0 +1,13 @@
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-chroma>=0.0.10
+openai>=1.0.0
+chromadb
+sentence-transformers
+cohere
+python-dotenv
+PyMuPDF
+fastapi
+uvicorn
+
+uvicorn api.server:app --reload

@@ -1,0 +1,41 @@
+ai-business-suite/
+├── README.md
+├── requirements.txt
+├── .env
+├── main.py                 # CLI / entrypoint to launch agents or serve via API
+
+# 🔧 Shared Core
+├── core/
+│   ├── llm_router.py       # Handles local vs API model use
+│   ├── memory.py           # Memory setup for agents
+│   ├── vector_store.py     # Vector DB setup (e.g. Chroma or Weaviate)
+│   └── file_ingestion.py   # PDF/DOCX ingestion + chunking + embedding
+
+# 🛠️ Tools (shared across agents)
+├── tools/
+│   ├── faq_tool.py
+│   ├── crm_tool.py
+│   ├── explain_legalese.py
+│   ├── translate.py
+│   ├── post_generator.py
+│   └── schedule_tool.py
+
+# 🧠 Agents
+├── agents/
+│   ├── ai1_customer_service.py
+│   ├── ai2_internal_assistant.py
+│   ├── ai3_doc_analyzer.py
+│   ├── ai4_social_media.py
+│   └── base_agent.py        # Agent factory with common setup
+
+# 🧪 Tests
+├── tests/
+│   ├── test_tools.py
+│   └── test_agents.py
+
+# 🌐 Web / API (Optional)
+├── api/
+│   └── server.py            # FastAPI or Flask API
+│
+└── frontend/                # (Optional) React/Tauri app for UI
+    └── README.md

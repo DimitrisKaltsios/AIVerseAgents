@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI2 Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="chat-container">
+    <h1>🧠 AI2 Internal Assistant</h1>
+    <form method="post" action="/chat">
+      <input type="text" name="query" placeholder="Ask something..." required>
+      <button type="submit">Send</button>
+    </form>
+
+    {% if query %}
+      <div class="chat-bubble user"><strong>You:</strong> {{ query }}</div>
+      <div class="chat-bubble bot"><strong>AI2:</strong> {{ response }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>
