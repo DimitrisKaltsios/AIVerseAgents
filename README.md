@@ -1,139 +1,92 @@
+# AIVerseAgents
 
-# 🧠 AI2 Internal Assistant
-
-AI2 is a powerful internal business assistant that allows employees to query company knowledge securely and intelligently. It leverages:
-
-- 🔍 **Document search with vector embeddings** (Cohere)
-- 💬 **LLM responses with RAG** (Together.ai)
-- 🌐 **User-friendly web interface** (FastAPI + HTML)
-- 🔐 Runs locally, keeps your data private
+AIVerseAgents is a modular, multi-agent AI framework designed to serve both customer-facing and internal business needs.  
+It leverages large language models (LLMs), Retrieval-Augmented Generation (RAG), and vector databases to provide intelligent, context-aware responses.  
+The project includes a FastAPI-powered web interface for seamless interaction with different AI agents.
 
 ---
 
-## 📁 Project Structure
+## 🚀 Features
 
-```
-ai-business-suite/
-├── agents/                  # AI agent logic
-├── core/                    # LLM router, embeddings, vector store
-├── api/                     # FastAPI server
-├── templates/               # HTML frontend
-├── static/                  # CSS styles
-├── db/                      # ChromaDB persistence
-├── main.py                  # CLI interface (optional)
-├── .env                     # API keys here
-├── requirements.txt
-├── README.md                # You're here!
-```
+- **Multi-Agent Architecture**: Supports multiple AI agents (e.g., AI1 for customer service, AI2 for internal assistance) with isolated vector stores and document ingestion pipelines.
+- **RAG Integration**: Utilizes RAG techniques to enhance response accuracy by retrieving relevant documents from vector databases.
+- **FastAPI Web Interface**: Provides a user-friendly web interface to interact with different AI agents.
+- **Modular Design**: Easily extendable to add more agents or integrate additional functionalities.
+- **Secure Configuration**: Uses `.env` files to manage API keys and sensitive configurations securely.
 
 ---
 
-## 🚀 Quickstart
+## 📂 Project Structure
 
-### 1. Clone the Repo
+AIVerseAgents/ ├── agents/ │ ├── ai1_assistant.py │ └── ai2_assistant.py ├── api/ │ └── server.py ├── core/ │ ├── file_ingestion.py │ └── vector_store.py ├── docs/ │ ├── ai1/ │ └── ai2/ ├── ragloaders/ │ ├── ingest_ai1_docs.py │ └── ingest_ai2_docs.py ├── static/ │ └── styles.css ├── templates/ │ └── chat.html ├── .env ├── chat_ai1.py ├── chat_ai2.py ├── requirements.txt └── README.md
 
-```bash
-git clone https://github.com/your-username/ai2-assistant.git
-cd ai2-assistant
-```
+---
 
-### 2. Install Dependencies
+## 🛠️ Installation
 
-```bash
+### 1. Clone the Repository
+
+git clone https://github.com/dkaltsios/AIVerseAgents.git
+cd AIVerseAgents
+
+### 2. Create a Virtual Environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+### 3. Install Dependencies
 pip install -r requirements.txt
-```
 
-> Make sure you're using **Python 3.10+**
+### 4. Configure Environment Variables
+Create a .env file in the root directory and add your API keys:
+COHERE_API_KEY=your-cohere-api-key
+TOGETHER_API_KEY=your-together-api-key
 
----
+### 📄 Document Ingestion
+Before running the agents, ingest the relevant documents into their respective vector stores.
 
-### 3. Add API Keys
+### Prepare Documents
+Place your .txt or .pdf documents in the appropriate directories:
 
-Create a `.env` file in the root:
+Customer-facing documents: docs/ai1/
 
-```
-COHERE_API_KEY=your-cohere-key
-TOGETHER_API_KEY=your-together-key
-```
+Internal documents: docs/ai2/
 
-Get keys:
-- [Cohere](https://dashboard.cohere.com/)
-- [Together](https://www.together.ai/)
+### Run Ingestion Scripts
+python ragloaders/ingest_ai1_docs.py
+python ragloaders/ingest_ai2_docs.py
 
----
-
-### 4. Ingest Your First PDF
-
-Place a document in the root directory and name it `sample.pdf`. The assistant will automatically ingest it when you launch it.
-
----
-
-### 5. Run the Web Interface
-
-```bash
+### 💬 Running the Web Interface
+## Start the FastAPI Server
 uvicorn api.server:app --reload
-```
 
-Then open [http://localhost:8000](http://localhost:8000) in your browser.
+### Access the Web Interface
+Open your browser and navigate to:
+http://localhost:8000
 
----
+### Interact with Agents
+Use the dropdown menu to select either the Customer Service Agent (AI1) or the Internal Assistant (AI2), enter your query, and click "Ask" to receive a response.
 
-## 🖥 Features
+### 🧪 Testing Agents via CLI
+Alternatively, you can interact with the agents using the command-line interface:
 
-- 📄 PDF ingestion using PyMuPDF
-- 🧠 Cohere embeddings + ChromaDB
-- 💬 Together.ai for answering questions using Mistral or LLaMA 3
-- 🖼 FastAPI + Jinja2 HTML frontend
-- 🔄 Full RAG chain via LangChain
+## AI1 (Customer Service Agent)
+python chat_ai1.py
+## AI2 (Internal Assistant)
+python chat_ai2.py
 
----
+### 🧱 Adding New Agents
+To add a new AI agent:
+Create a new assistant script in the agents/ directory (e.g., ai3_assistant.py).
+Implement the necessary logic for the new agent.
+Add a corresponding document ingestion script in ragloaders/ (e.g., ingest_ai3_docs.py).
+Update the FastAPI server (api/server.py) to include routes for the new agent.
+Modify the HTML template (templates/chat.html) to add the new agent to the dropdown menu.
 
-## 🔧 Customization
+### 📌 License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Change the Model
+### 🤝 Contributing
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-Edit `core/llm_router.py`:
-
-```python
-model_name="mistralai/Mistral-7B-Instruct-v0.1"
-```
-
-You can try:
-- `meta-llama/Llama-3-8b-chat-hf`
-- `openchat/openchat-3.5-1210`
-- See full list: https://api.together.ai/models
-
----
-
-### Add More Documents
-
-You can modify `main.py` or create a drag-and-drop UI for batch ingestion.
-
----
-
-## 🧪 Test Locally
-
-```bash
-python main.py
-```
-
-Use the terminal to ask questions from your ingested data.
-
----
-
-## ✨ Coming Soon Ideas
-
-- Slack or MS Teams bot integration
-- Upload-anywhere document support
-- Admin dashboard for usage/stats
-- Access control by department/user
-
----
-
-## 🙌 Credits
-
-Built using:
-- [LangChain](https://www.langchain.com/)
-- [Cohere](https://cohere.com/)
-- [Together AI](https://www.together.ai/)
-- [FastAPI](https://fastapi.tiangolo.com/)
+### 📞 Contact
+For any inquiries or support, please open an issue on the GitHub repository.
