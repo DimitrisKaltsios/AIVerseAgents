@@ -18,7 +18,32 @@ The project includes a FastAPI-powered web interface for seamless interaction wi
 
 ## 📂 Project Structure
 
-AIVerseAgents/ ├── agents/ │ ├── ai1_assistant.py │ └── ai2_assistant.py ├── api/ │ └── server.py ├── core/ │ ├── file_ingestion.py │ └── vector_store.py ├── docs/ │ ├── ai1/ │ └── ai2/ ├── ragloaders/ │ ├── ingest_ai1_docs.py │ └── ingest_ai2_docs.py ├── static/ │ └── styles.css ├── templates/ │ └── chat.html ├── .env ├── chat_ai1.py ├── chat_ai2.py ├── requirements.txt └── README.md
+AIVerseAgents/ 
+├── agents/     
+│   │── ai1_assistant.py  
+│   └── ai2_assistant.py 
+├── api/        
+│   │── server.py 
+├── core/       
+│   ├── file_ingestion.py
+│   |── embedding_pipelines.py
+│   ├── llm_router.py
+│   └── vector_store.py 
+├── docs/       
+│   ├── ai1/.. 
+│   └── ai2/..         
+├── ragloaders/ 
+│   ├── ingest_ai1_docs.py 
+│   └── ingest_ai2_docs.py  
+├── static/ 
+│ └── styles.css 
+├── templates/ 
+│ └── chat.html 
+├── .env 
+├── chat_ai1.py 
+├── chat_ai2.py 
+├── requirements.txt 
+└── README.md
 
 ---
 
@@ -41,7 +66,9 @@ Create a .env file in the root directory and add your API keys:
 COHERE_API_KEY=your-cohere-api-key
 TOGETHER_API_KEY=your-together-api-key
 
-### 📄 Document Ingestion
+---
+
+## 📄 Document Ingestion
 Before running the agents, ingest the relevant documents into their respective vector stores.
 
 ### Prepare Documents
@@ -55,8 +82,10 @@ Internal documents: docs/ai2/
 python ragloaders/ingest_ai1_docs.py
 python ragloaders/ingest_ai2_docs.py
 
-### 💬 Running the Web Interface
-## Start the FastAPI Server
+---
+
+## 💬 Running the Web Interface
+### Start the FastAPI Server
 uvicorn api.server:app --reload
 
 ### Access the Web Interface
@@ -66,15 +95,19 @@ http://localhost:8000
 ### Interact with Agents
 Use the dropdown menu to select either the Customer Service Agent (AI1) or the Internal Assistant (AI2), enter your query, and click "Ask" to receive a response.
 
-### 🧪 Testing Agents via CLI
+---
+
+## 🧪 Testing Agents via CLI
 Alternatively, you can interact with the agents using the command-line interface:
 
-## AI1 (Customer Service Agent)
+### AI1 (Customer Service Agent)
 python chat_ai1.py
-## AI2 (Internal Assistant)
+### AI2 (Internal Assistant)
 python chat_ai2.py
 
-### 🧱 Adding New Agents
+---
+
+## 🧱 Adding New Agents
 To add a new AI agent:
 Create a new assistant script in the agents/ directory (e.g., ai3_assistant.py).
 Implement the necessary logic for the new agent.
@@ -82,11 +115,19 @@ Add a corresponding document ingestion script in ragloaders/ (e.g., ingest_ai3_d
 Update the FastAPI server (api/server.py) to include routes for the new agent.
 Modify the HTML template (templates/chat.html) to add the new agent to the dropdown menu.
 
-### 📌 License
+---
+
+## 📌 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-### 🤝 Contributing
+---
+
+## 🤝 Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-### 📞 Contact
+---
+
+## 📞 Contact
 For any inquiries or support, please open an issue on the GitHub repository.
+
+---
