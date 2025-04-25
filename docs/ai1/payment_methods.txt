@@ -1,0 +1,9 @@
+Payment Methods
+
+We accept the following payment options:
+- Visa
+- Mastercard
+- American Express
+- PayPal
+- Apple Pay
+All transactions are secured and encrypted.

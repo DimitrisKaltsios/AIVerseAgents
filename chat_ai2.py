@@ -15,9 +15,9 @@ def run_cli():
         print("AI2:", ask_question(q))
 
 if __name__ == "__main__":
-    # Optional: ingest a sample doc
-    if os.path.exists("sample.pdf"):
-        text = extract_text_from_pdf("sample.pdf")
-        ingest_docs([text])
-        print("📄 Sample PDF ingested.")
+    # ✅ Load internal docs into a dedicated index
+    # if os.path.exists("docs/ai2/HR_policies.pdf"):
+    #     text = extract_text_from_pdf("docs/ai2/HR_policies.pdf")
+    #     ingest_docs([text], index_path="db/ai2_internal")
+    #     print("📄 Internal PDF ingested for AI2.")
     run_cli()
