@@ -8,22 +8,44 @@
 <body>
   <div class="container">
     <h1>Agents powered by Artificial Intelligence</h1>
-    <form method="post" action="/chat">
-      <input type="text" name="query" placeholder="Ask something..." required>
+    <form method="post" action="/chat" enctype="multipart/form-data">
+      <input type="text" name="query" id="query" placeholder="Ask something...">
       
-      <select name="agent_type">
+      <select name="agent_type" id="agent_type" onchange="toggleFileInput()">
         <option value="ai1">Customer Service Agent (AI1)</option>
         <option value="ai2">Internal Assistant (AI2)</option>
+        <option value="ai3">Document Explainer (AI3)</option>
       </select>
       
+      <input type="file" name="file" id="file_input" style="display: none;">
+
       <button type="submit">Ask</button>
     </form>
 
     {% if query %}
       <div class="chat-bubble user"><strong>You:</strong> {{ query }}</div>
+    {% endif %}
+    {% if response %}
       <div class="chat-bubble bot"><strong>{{ agent_type|upper }}:</strong> {{ response }}</div>
     {% endif %}
-
   </div>
+
+  <script>
+    function toggleFileInput() {
+      const agentType = document.getElementById("agent_type").value;
+      const fileInput = document.getElementById("file_input");
+      const queryInput = document.getElementById("query");
+
+      if (agentType === "ai3") {
+        fileInput.style.display = "inline";
+        queryInput.disabled = true;
+        queryInput.placeholder = "Upload a document instead...";
+      } else {
+        fileInput.style.display = "none";
+        queryInput.disabled = false;
+        queryInput.placeholder = "Ask something...";
+      }
+    }
+  </script>
 </body>
 </html>
